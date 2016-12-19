@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./app/server.js | bistre"
+    "start": "node ./app/server.js | bistre",
+    "pro": "export NODE_ENV=production && pm2 restart app/server.js --name='dayang'"
   },
   "author": "",
   "license": "ISC",
@@ -16,8 +17,7 @@
     "express": "^4.14.0",
     "iconv-lite": "^0.4.13",
     "superagent": "^2.3.0",
-    "superagent-charset": "^1.1.1",
-    "tesseract.js": "^1.0.10"
+    "superagent-charset": "^1.1.1"
   },
   "devDependencies": {
     "bistre": "^1.0.1",
