@@ -2,7 +2,8 @@ const log = require('bole')('customers/router');
 const express = require('express');
 const router = new express.Router();
 const getJuejin = require('./juejin').getJuejin;
-const dailyZhihu =  require('./dailyZhihu').dailyZhihu;
+const dailyZhihu = require('./dailyZhihu').dailyZhihu;
+const jianshu = require('./jianshu').jianshu;
 
 const resources = {
   github: getJuejin,
@@ -12,8 +13,9 @@ const resources = {
   wanqu: getJuejin,
   ithome: getJuejin,
   solidot: getJuejin,
-
+  // jujin ↑
   dailyZhihu: dailyZhihu,
+  jianshu: jianshu,
 }
 function handler(req, res) {
   const getResource = resources[req.query.name];
