@@ -8,15 +8,15 @@
   solidot
 */
 const cheerio = require("cheerio");
-const superagent = charset(require('superagent'));
+const superagent = require('superagent');
 
 // 浏览器请求报文头部部分信息
 
 const browserMsg = {
   "Accept-Encoding": "gzip, deflate",
+  "Host": "api.xitu.io",
   "Origin": "http://e.xitu.io",
   "Referer": "http://e.xitu.io",
-  "Host": "api.xitu.io",
   "Content-Type": "application/json",
   "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36",
 };

@@ -1,5 +1,5 @@
 const cheerio = require("cheerio");
-const superagent = charset(require('superagent'));
+const superagent = require('superagent');
 
 // 浏览器请求报文头部部分信息
 
@@ -23,8 +23,8 @@ function dailyZhihu(params, callback) {
         const $ = cheerio.load(body);
 
         result.data = [];
-        const aTag = $('.main-content-wrap a');
-        aTag.each(function(index) {
+        const itemList = $('.main-content-wrap a');
+        itemList.each(function(index) {
           const url = 'http://daily.zhihu.com' + $(this).attr('href');
           const title = $(this).children('span').text();
           result.data.push({
