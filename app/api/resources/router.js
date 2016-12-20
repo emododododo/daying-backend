@@ -25,14 +25,17 @@ function handler(req, res) {
       name: req.query.name
     }, (result) => {
       if (result.error) {
-        res.status(500).send(result.error);
+        res.status(501).send(result);
       } else {
-        res.json(result.data);
+        result.data = JSON.stringify(result.data);
+        res.json(result);
       }
     });
   } else {
     // error
-    res.status(500).send('not found resource!!!');
+    res.status(501).send({
+      error: "Not found this resource"
+    });
   }
 
 }
