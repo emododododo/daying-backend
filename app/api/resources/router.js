@@ -27,7 +27,7 @@ function handler(req, res) {
       if (result.error) {
         res.status(501).send(result);
       } else {
-        result.data = JSON.stringify(result.data);
+        result.data = result.data;
         res.json(result);
       }
     });
