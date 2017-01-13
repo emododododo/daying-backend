@@ -10,15 +10,6 @@ const browserMsg = {
   "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36",
 };
 
-const dailyZhihuList = {
-  title: '知乎日报',
-  id: 'dailyZhihu',
-  data: [{
-    title: '知乎日报热门',
-    id: 'dailyZhihu',
-  }],
-};
-
 // function dailyZhihu(params, callback) {
 //   superagent
 //     .get("http://daily.zhihu.com")
@@ -64,8 +55,7 @@ function dailyZhihuThemes() {
               id: `dailyZhihu_theme_${item.id}`,
             }
           });
-          dailyZhihuList.data = dailyZhihuList.data.concat(themes);
-          resolve();
+          resolve(themes);
         }
     });
   });
@@ -83,14 +73,13 @@ function dailyZhihuSections() {
         if (error) {
           console.log(error);
         } else {
-          const themes = JSON.parse(response.text).data.map((item) => {
+          const sections = JSON.parse(response.text).data.map((item) => {
             return {
               title: item.name,
               id: `dailyZhihu_section_${item.id}`,
             }
           });
-          dailyZhihuList.data = dailyZhihuList.data.concat(themes);
-          resolve();
+          resolve(sections);
         }
     });
   });
@@ -99,11 +88,22 @@ function dailyZhihuSections() {
 
 // getDailyZhihuList (需要添加失败情况)
 function getDailyZhihuList() {
+  const dailyZhihuList = {
+    title: '知乎日报',
+    id: 'dailyZhihu',
+    data: [{
+      title: '知乎日报热门',
+      id: 'dailyZhihu',
+    }],
+  };
   const promise = new Promise((resolve) => {
     Promise.all([
       dailyZhihuThemes(),
       dailyZhihuSections(),
-    ]).then(() => {
+    ]).then((values) => {
+      values.forEach((item) => {
+        dailyZhihuList.data = dailyZhihuList.data.concat(item);
+      });
       resolve([dailyZhihuList])
     });
   });
