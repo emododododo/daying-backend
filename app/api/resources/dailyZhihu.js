@@ -112,7 +112,7 @@ function getDailyZhihuList() {
 // handler dailyZhihu api
 function dailyZhihu(params, callback) {
   let url = 'http://news-at.zhihu.com/api/4/news/latest';
-  const storyUrl = 'https://daily.zhihu.com/story/';
+  const storyUrl = 'http://daily.zhihu.com/story/';
 
   switch (params.name.split('_')[1]) {
     case 'section':
