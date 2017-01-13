@@ -48,7 +48,6 @@ function dailyZhihuThemes() {
         if (error) {
           console.log(error);
         } else {
-          // console.log(response.text);
           const themes = JSON.parse(response.text).others.map((item) => {
             return {
               title: item.name,
@@ -113,7 +112,7 @@ function getDailyZhihuList() {
 // handler dailyZhihu api
 function dailyZhihu(params, callback) {
   let url = 'http://news-at.zhihu.com/api/4/news/latest';
-  const storyUrl = 'http://news-at.zhihu.com/api/4/story';
+  const storyUrl = 'https://daily.zhihu.com/story/';
 
   switch (params.name.split('_')[1]) {
     case 'section':
@@ -125,7 +124,7 @@ function dailyZhihu(params, callback) {
         } else {
           result.data = JSON.parse(response.text).stories.map((item) => {
             return {
-              url: `${storyUrl}/${item.id}`,
+              url: `${storyUrl}${item.id}`,
               title: item.title,
             }
           });
@@ -134,9 +133,7 @@ function dailyZhihu(params, callback) {
       });
       break;
     case 'theme':
-      console.log(params.name.split('_')[2] + 'fjdslkjflkdsj');
       url = `http://news-at.zhihu.com/api/3/theme/${params.name.split('_')[2]}`;
-      console.log(url)
       superagentHandler(url, (error, response, body) => {
         const result = {};
         if (error) {
@@ -144,7 +141,7 @@ function dailyZhihu(params, callback) {
         } else {
           result.data = JSON.parse(response.text).stories.map((item) => {
             return {
-              url: `${storyUrl}/${item.id}`,
+              url: `${storyUrl}${item.id}`,
               title: item.title,
               date: item.display_date,
             }
@@ -162,7 +159,7 @@ function dailyZhihu(params, callback) {
         } else {
           result.data = JSON.parse(response.text).stories.map((item) => {
             return {
-              url: `${storyUrl}/${item.id}`,
+              url: `${storyUrl}${item.id}`,
               title: item.title,
               date: JSON.parse(response.text).date,
             }
