@@ -127,7 +127,7 @@ function dailyZhihu(params, callback) {
             return {
               url: `${storyUrl}${item.id}`,
               title: item.title,
-              date: moment(JSON.parse(response.text).stories.date, 'YYYYMMDD').format('MMMDo'),
+              date: moment(item.date, 'YYYYMMDD').format('MMMDo'),
             }
           });
         }
