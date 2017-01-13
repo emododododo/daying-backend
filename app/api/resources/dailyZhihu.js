@@ -63,26 +63,43 @@ function dailyZhihuThemes() {
 
 // get dailyZhihuSections list
 function dailyZhihuSections() {
-  const promise = new Promise((resolve) => {
-    superagent
-      .get("http://news-at.zhihu.com/api/3/sections")
-      .set(browserMsg)
-      .end((error, response, body) => {
-        const result = {};
-        if (error) {
-          console.log(error);
-        } else {
-          const sections = JSON.parse(response.text).data.map((item) => {
-            return {
-              title: item.name,
-              id: `dailyZhihu_section_${item.id}`,
-            }
-          });
-          resolve(sections);
-        }
-    });
-  });
-  return promise;
+  const sections = [{
+    title: '瞎扯',
+    id: 'dailyZhihu_section_2',
+  }, {
+    title: '放映机',
+    id: 'dailyZhihu_section_28',
+  }, {
+    title: '大误',
+    id: 'dailyZhihu_section_29',
+  }, {
+    title: '小事',
+    id: 'dailyZhihu_section_35',
+  }, {
+    title: '知乎好问题',
+    id: 'dailyZhihu_section_38',
+  }];
+  return sections;
+  // const promise = new Promise((resolve) => {
+  //   superagent
+  //     .get("http://news-at.zhihu.com/api/3/sections")
+  //     .set(browserMsg)
+  //     .end((error, response, body) => {
+  //       const result = {};
+  //       if (error) {
+  //         console.log(error);
+  //       } else {
+  //         const sections = JSON.parse(response.text).data.map((item) => {
+  //           return {
+  //             title: item.name,
+  //             id: `dailyZhihu_section_${item.id}`,
+  //           }
+  //         });
+  //         resolve(sections);
+  //       }
+  //   });
+  // });
+  // return promise;
 }
 
 // getDailyZhihuList (需要添加失败情况)
