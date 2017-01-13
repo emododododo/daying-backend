@@ -9,7 +9,8 @@
 */
 const cheerio = require("cheerio");
 const superagent = require('superagent');
-
+const moment = require('moment');
+moment.locale('zh-cn');
 // 浏览器请求报文头部部分信息
 
 const browserMsg = {
@@ -46,7 +47,7 @@ function getJuejin(params, callback) {
           result.data = result.data.reduce((arr, item) => {
             arr.push({
               url: item.url,
-              date: item.date.iso,
+              date: moment(item.date.iso).format('MMMDo'),
               title: item.title
             });
             return arr;

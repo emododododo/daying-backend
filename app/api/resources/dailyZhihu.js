@@ -1,8 +1,8 @@
 const cheerio = require("cheerio");
 const superagent = require('superagent');
-
+const moment = require('moment');
+moment.locale('zh-cn');
 // 浏览器请求报文头部部分信息
-
 const browserMsg = {
   "Accept-Encoding": "gzip, deflate",
   "Content-Type": "text/html; charset=UTF-8",
@@ -93,6 +93,7 @@ function getDailyZhihuList() {
     data: [{
       title: '知乎日报热门',
       id: 'dailyZhihu',
+      date: moment().format('MMMDo'),
     }],
   };
   const promise = new Promise((resolve) => {
@@ -126,6 +127,7 @@ function dailyZhihu(params, callback) {
             return {
               url: `${storyUrl}${item.id}`,
               title: item.title,
+              date: moment(JSON.parse(response.text).stories.date, 'YYYYMMDD').format('MMMDo'),
             }
           });
         }
@@ -143,7 +145,7 @@ function dailyZhihu(params, callback) {
             return {
               url: `${storyUrl}${item.id}`,
               title: item.title,
-              date: item.display_date,
+              date: moment().format('MMMDo'),
             }
           });
         }
@@ -161,7 +163,7 @@ function dailyZhihu(params, callback) {
             return {
               url: `${storyUrl}${item.id}`,
               title: item.title,
-              date: JSON.parse(response.text).date,
+              date: moment(JSON.parse(response.text).date, 'YYYYMMDD').format('MMMDo'),
             }
           });
         }
