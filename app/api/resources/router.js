@@ -6,6 +6,7 @@ const dailyZhihu = require('./dailyZhihu').dailyZhihu;
 const jianshu = require('./jianshu').jianshu;
 const smzdm = require('./jianshu').smzdm;
 const getList = require('./getList').getList;
+const qqSports= require('./qqSports').qqSports;
 
 const resources = {
   github: getJuejin,
@@ -16,10 +17,12 @@ const resources = {
   ithome: getJuejin,
   solidot: getJuejin,
   // jujin ↑
-  dailyZhihu: dailyZhihu,
-  jianshu: jianshu,
-  smzdm: smzdm,
-  getList: getList,
+  dailyZhihu,
+  jianshu,
+  smzdm,
+  qqSports,
+
+  getList,
 }
 function handler(req, res) {
   const getResource = resources[req.query.name.split('_')[0]];
