@@ -17,6 +17,7 @@
     "cheerio": "^0.22.0",
     "ejs": "^2.5.2",
     "express": "^4.14.0",
+    "feedparser": "^2.1.0",
     "iconv-lite": "^0.4.13",
     "moment": "^2.17.1",
     "superagent": "^2.3.0",
