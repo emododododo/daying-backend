@@ -59,25 +59,24 @@ function getJuejin(params, callback) {
     });
 }
 
-const juejinList = [{
-    title: '博客园',
-    id: 'cnblogs',
-  }, {
-    title: 'csdn',
-    id: 'csdn',
-  }, {
-    title: '湾区',
-    id: 'wanqu',
-  }, {
-    title: 'IT之家',
-    id: 'ithome',
-  }, {
-    title: 'solidot奇客',
-    id: 'solidot',
-  }
-];
-
 function getJuejinList() {
+  const juejinList = [{
+      title: '博客园',
+      id: 'cnblogs',
+    }, {
+      title: 'csdn',
+      id: 'csdn',
+    }, {
+      title: '湾区',
+      id: 'wanqu',
+    }, {
+      title: 'IT之家',
+      id: 'ithome',
+    }, {
+      title: 'solidot奇客',
+      id: 'solidot',
+    }
+  ];
   return juejinList;
 }
 
