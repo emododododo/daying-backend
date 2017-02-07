@@ -7,7 +7,6 @@
   ithome
   solidot
 */
-const cheerio = require("cheerio");
 const superagent = require('superagent');
 const moment = require('moment');
 moment.locale('zh-cn');
