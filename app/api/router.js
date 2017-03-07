@@ -1,9 +1,8 @@
-
-const log = require('bole')('customers/router');
 const express = require('express');
+
 const router = new express.Router();
 
-function api (req, res) {
+function api(req, res) {
   res.render('api/api');
 }
 
