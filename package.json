@@ -27,7 +27,7 @@
     "feedparser": "^2.1.0",
     "iconv-lite": "^0.4.13",
     "moment": "^2.17.1",
-    "precommit": "^1.2.2",
+    "pre-commit": "^1.2.2",
     "superagent": "^2.3.0",
     "superagent-charset": "^1.1.1",
     "tape": "^4.6.2"
