@@ -1,4 +1,4 @@
-const cheerio = require("cheerio");
+const cheerio = require('cheerio');
 const superagent = require('superagent');
 
 // 浏览器请求报文头部部分信息
@@ -24,9 +24,9 @@ function jianshu(params, callback) {
         const $ = cheerio.load(body);
 
         result.data = [];
-        const itemList = $('.article-list .have-img');
+        const itemList = $('.note-list .have-img');
         itemList.each(function handler() {
-          const $tT = $(this).find('.title a');
+          const $tT = $(this).find('.title');
           const url = `http://www.jianshu.com${$tT.attr('href')}`;
           const title = $tT.text();
           result.data.push({
@@ -40,4 +40,13 @@ function jianshu(params, callback) {
     });
 }
 
+function getJianshuList() {
+  const jianshuList = {
+    title: '简书',
+    id: 'jianshu',
+  };
+  return jianshuList;
+}
+
 exports.jianshu = jianshu;
+exports.getJianshuList = getJianshuList;

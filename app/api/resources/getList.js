@@ -2,6 +2,7 @@ const getDailyZhihuList = require('./dailyZhihu').getDailyZhihuList;
 const getJuejinList = require('./juejin').getJuejinList;
 const getqqRssList = require('./qqSports').getqqRssList;
 const getSmzdmList = require('./smzdm').getSmzdmList;
+const getJianshuList = require('./jianshu').getJianshuList;
 // 浏览器请求报文头部部分信息
 function getList(params, callback) {
   Promise.all([
@@ -9,6 +10,7 @@ function getList(params, callback) {
     getJuejinList(),
     getqqRssList(),
     getSmzdmList(),
+    getJianshuList(),
   ]).then((values) => {
     let allDataList = [];
     values.forEach((item) => {
