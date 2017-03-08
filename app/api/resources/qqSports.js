@@ -1,44 +1,43 @@
-const superagent = require("superagent");
-const feedparser = require("feedparser");
+const superagent = require('superagent');
+const Feedparser = require('feedparser');
 const moment = require('moment');
+
 moment.locale('zh-cn');
 
 const rss = {
   basket: 'http://sports.qq.com/basket/rss_basket.xml',
   soccer: 'http://sports.qq.com/isocce/rss_isocce.xml',
-}
+};
 
 function qqSports(params, callback) {
   const url = rss[params.name.split('_')[1]];
 
-  const req_stream = superagent
+  const reqStream = superagent
     .get(url)
     .buffer()
     .type('xml')
-    .end(function(error, pres) {
+    .end((error) => {
       if (error) {
         callback({
           error,
         });
       }
-    })
+    });
 
   const result = {};
   result.data = [];
 
-  req_stream
-    .pipe(new feedparser())
-    .on("error", function(error) {
+  reqStream
+    .pipe(new Feedparser())
+    .on('error', (error) => {
       callback({
         error,
       });
-    }).on("meta", function(meta) {
-        // console.log("===== %s =====", meta.title)
-    }).on("readable", function() {
+    }).on('readable', function handler() {
       const $stream = this;
-      let item;
+      const item = $stream.read();
 
-      if (item = $stream.read()) {
+      if (item) {
         result.data.push({
           title: item.title || item.description,
           url: item.link || item.guid,
@@ -47,8 +46,7 @@ function qqSports(params, callback) {
       } else {
         callback(result);
       }
-    })
-
+    });
 }
 
 function getqqRssList() {
