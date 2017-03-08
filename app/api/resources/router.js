@@ -4,7 +4,7 @@ const router = new express.Router();
 const getJuejin = require('./juejin').getJuejin;
 const dailyZhihu = require('./dailyZhihu').dailyZhihu;
 const jianshu = require('./jianshu').jianshu;
-const smzdm = require('./jianshu').smzdm;
+const smzdm = require('./smzdm').smzdm;
 const getList = require('./getList').getList;
 const qqSports = require('./qqSports').qqSports;
 
@@ -27,7 +27,6 @@ const resources = {
 
 function handler(req, res) {
   const getResource = resources[req.query.name.split('_')[0]];
-
   if (getResource) {
     getResource({
       name: req.query.name,

@@ -24,11 +24,11 @@ function smzdm(params, callback) {
         const $ = cheerio.load(body);
 
         result.data = [];
-        const itemList = $('.article-list .have-img');
+        const itemList = $('#feed-main-list .feed-row-wide');
         itemList.each(function handler() {
-          const $tT = $(this).find('.title a');
-          const url = `http://www.jianshu.com${$tT.attr('href')}`;
-          const title = $tT.text();
+          const $tT = $(this).find('.feed-block-title a');
+          const url = $tT.attr('href');
+          const title = $tT.text().replace(/\s/g, '');
           result.data.push({
             url,
             title,
@@ -40,4 +40,12 @@ function smzdm(params, callback) {
     });
 }
 
+function getSmzdmList() {
+  const smzdmList = {
+    title: '什么值得买精选',
+    id: 'smzdm',
+  };
+  return smzdmList;
+}
 exports.smzdm = smzdm;
+exports.getSmzdmList = getSmzdmList;
