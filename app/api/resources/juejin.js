@@ -9,26 +9,27 @@
 */
 const superagent = require('superagent');
 const moment = require('moment');
+
 moment.locale('zh-cn');
 // 浏览器请求报文头部部分信息
 
 const browserMsg = {
-  "Accept-Encoding": "gzip, deflate",
-  "Host": "api.xitu.io",
-  "Origin": "http://e.xitu.io",
-  "Referer": "http://e.xitu.io",
-  "Content-Type": "application/json",
-  "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36",
+  'Accept-Encoding': 'gzip, deflate',
+  Host: 'api.xitu.io',
+  Origin: 'http://e.xitu.io',
+  Referer: 'http://e.xitu.io',
+  'Content-Type': 'application/json',
+  'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36',
 };
-const resourcesUrl = "http://api.xitu.io/resources/";
+const resourcesUrl = 'http://api.xitu.io/resources/';
 
 const data = {
-  "category": "trending",
-  "period": "day",
-  "lang": "javascript",
-  "offset": 0,
-  "limit": 30
-}
+  category: 'trending',
+  period: 'day',
+  lang: 'javascript',
+  offset: 0,
+  limit: 30,
+};
 
 function getJuejin(params, callback) {
   const url = resourcesUrl + params.name;
@@ -36,18 +37,18 @@ function getJuejin(params, callback) {
     .post(url)
     .send(data)
     .set(browserMsg)
-    .end((error, response, body) => {
+    .end((error, response) => {
       const result = {};
       if (error) {
         result.error = error;
       } else {
         result.data = JSON.parse(response.text).data;
-        if (params.name != 'github') {
+        if (params.name !== 'github') {
           result.data = result.data.reduce((arr, item) => {
             arr.push({
               url: item.url,
               date: moment(item.date.iso).format('MMMDo'),
-              title: item.title
+              title: item.title,
             });
             return arr;
           }, []);
@@ -60,22 +61,21 @@ function getJuejin(params, callback) {
 
 function getJuejinList() {
   const juejinList = [{
-      title: '博客园',
-      id: 'cnblogs',
-    }, {
-      title: 'csdn',
-      id: 'csdn',
-    }, {
-      title: '湾区',
-      id: 'wanqu',
-    }, {
-      title: 'IT之家',
-      id: 'ithome',
-    }, {
-      title: 'solidot奇客',
-      id: 'solidot',
-    }
-  ];
+    title: '博客园',
+    id: 'cnblogs',
+  }, {
+    title: 'csdn',
+    id: 'csdn',
+  }, {
+    title: '湾区',
+    id: 'wanqu',
+  }, {
+    title: 'IT之家',
+    id: 'ithome',
+  }, {
+    title: 'solidot奇客',
+    id: 'solidot',
+  }];
   return juejinList;
 }
 
